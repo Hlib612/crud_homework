@@ -11,19 +11,17 @@ const options1 ={
 
 
 
-const getStudents = () => {
+const getStudents = async () => {
 
- fetch(`http://localhost:3000/students` , options1)
- .then(result =>{
-    console.log(result)
-    result.json()
- })
-
+ const responce = await fetch(`http://localhost:3000/students` , options1)
+ const students = await responce.json()
+return students;
 
  }
 
  getStudents()
-
+ .then(result => console.log(result))
+.catch(err => console.log(err))
 
 
 // Функція для відображення студентів у таблиці
