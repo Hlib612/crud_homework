@@ -1,4 +1,5 @@
 import './style.css'
+ const visualStudentsList = document.querySelector("#students_list")
 
 fetch(`http://localhost:3000/students`)
 
@@ -18,30 +19,40 @@ const getStudents = async () => {
 return students;
 
  }
-
- getStudents()
- .then(result => console.log(result))
+ 
+getStudents()
+ .then(result => console.log(...result))
 .catch(err => console.log(err))
 
 
 // Функція для відображення студентів у таблиці
 
-function renderStudents(students) {
+const renderStudents = async () =>  {
 
- // твій код
-
- 
-
+getStudents()
+ .then(result => {
+    visualStudentsList.insertAdjacentHTML = ``;
+    result.map(student => {
+        console.log(student)
+        console.log(student.name)
+        visualStudentsList.insertAdjacentHTML("beforeend", `<li>name: ${student.name}</li>`)
+        console.log(visualStudentsList)
+    })
+ })
+.catch(err => console.log(err))
 }
+
+// renderStudents()
+
 
 
 
 // Функція для додавання нового студента
 
-function addStudent(e) {
+const addStudent = async (e) => {
 
  // твій код
-ІІІІІ
+
   
 
 }
