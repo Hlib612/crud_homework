@@ -49,13 +49,26 @@ getStudents()
 
 // Функція для додавання нового студента
 
-const addStudent = async (e) => {
-
- // твій код
-
-  
-
+const studentToAdd = {
+    id: 6,
+    name: "Dima Bondar",
+    age: 14,
 }
+
+const options2 ={
+    method: "POST",
+    body: studentToAdd,
+}
+
+const addStudent = async () => {
+
+const response = await fetch(`http://localhost:3000/students` , options2)
+const student = await response.json()
+  
+return student
+}
+
+addStudent()
 
 
 
