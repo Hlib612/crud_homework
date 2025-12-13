@@ -1,20 +1,31 @@
 import './style.css'
  const visualStudentsList = document.querySelector("#students_list")
+const visualStudentTable = document.querySelector("#student_table_tamplate")
+const studentTableEl = document.querySelector("#students-table")
+const getStudentBtn = document.querySelector("#get-students-btn")
 
-fetch(`http://localhost:3000/students`)
+const tableBody = studentTableEl.querySelector('tbody')
+// fetch(`http://localhost:3000/students`)
 
 // Функція для отримання всіх студентів
 
-const options1 ={
-    method: "GET",
-}
+// const options1 ={
+//     method: "GET",
+// }
+
+// Handelbars
+const template = Handlebars.compile(visualStudentTable.innerHTML)
+
+
+
+
 
 
 
 
 const getStudents = async () => {
 
- const responce = await fetch(`http://localhost:3000/students` , options1)
+ const responce = await fetch(`http://localhost:3000/students`)
  const students = await responce.json()
 return students;
 
@@ -27,23 +38,26 @@ getStudents()
 
 // Функція для відображення студентів у таблиці
 
-const renderStudents = async () =>  {
+const renderStudents = () =>  {
 
 getStudents()
  .then(result => {
-    visualStudentsList.insertAdjacentHTML = ``;
-    result.map(student => {
-        console.log(student)
-        console.log(student.name)
-        visualStudentsList.insertAdjacentHTML("beforeend", `<li>name: ${student.name}</li>`)
-        console.log(visualStudentsList)
-    })
+const murkup = template(result)
+console.log(murkup)
+tableBody.innerHTML = murkup;
+    // // visualStudentsList.innerHTML = ``;
+    // const murkup = result.map(student => {
+    //     // console.log(student)
+    //     // console.log(student.name)
+    //     return `<li>name: ${student.name}</li>`;
+    // })
+    // // visualStudentsList.insertAdjacentHTML("beforeend" , murkup.join(""))
  })
 .catch(err => console.log(err))
 }
 
-// renderStudents()
 
+getStudentBtn.addEventListener("click" , renderStudents())
 
 
 
@@ -57,7 +71,7 @@ const studentToAdd = {
 
 const options2 ={
     method: "POST",
-    body: studentToAdd,
+    body: JSON.stringify(studentToAdd),
 }
 
 const addStudent = async () => {
@@ -68,7 +82,7 @@ const student = await response.json()
 return student
 }
 
-addStudent()
+// addStudent()
 
 
 
