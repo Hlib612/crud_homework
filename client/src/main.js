@@ -3,6 +3,13 @@ import './style.css'
 const visualStudentTable = document.querySelector("#student_table_tamplate")
 const studentTableEl = document.querySelector("#students-table")
 const getStudentBtn = document.querySelector("#get-students-btn")
+const addStudentForm = document.querySelector("#add_student_form")
+const nameInput = document.querySelector("#name")
+const ageInput = document.querySelector("#age")
+const courseInput = document.querySelector("#course")
+const skillsInput = document.querySelector("#skills")
+const emailInput = document.querySelector("#email")
+const isEnrolledInput = document.querySelector("#isEnrolled")
 
 const tableBody = studentTableEl.querySelector('tbody')
 // fetch(`http://localhost:3000/students`)
@@ -63,26 +70,54 @@ getStudentBtn.addEventListener("click" , renderStudents())
 
 // Функція для додавання нового студента
 
-const studentToAdd = {
-    id: 6,
-    name: "Dima Bondar",
-    age: 14,
+
+let studentToAdd = {}
+
+
+
+
+
+const addStudent = async (options) => {
+
+const response = await fetch(`http://localhost:3000/students` , options)
+const student = await response.json()
+  
+return student
 }
+
+
+const readStudent = (event) => {
+    event.preventDefault()
+    console.log(nameInput.value)
+     console.log(ageInput.value)
+      console.log(courseInput.value)
+       console.log(skillsInput.value)
+        console.log(emailInput.value)
+         console.log(isEnrolledInput.value)
+
+let name = nameInput.value;
+let age = ageInput.value;
+let course = courseInput.value;
+let skills = skillsInput.value;
+let email = emailInput.value;
+let enrolled = isEnrolledInput.value;
+
+studentToAdd.innerHTML =`id: 6 , name: ${name}`
 
 const options2 ={
     method: "POST",
     body: JSON.stringify(studentToAdd),
 }
 
-const addStudent = async () => {
-
-const response = await fetch(`http://localhost:3000/students` , options2)
-const student = await response.json()
-  
-return student
+addStudent(options2)
 }
 
-// addStudent()
+addStudentForm.addEventListener("submit" , readStudent)
+
+
+
+
+
 
 
 
@@ -100,7 +135,7 @@ function updateStudent(id) {
 
 // Функція для видалення студента
 
-function deleteStudent(id) {
+const deleteStudent = async (id) => {
 
     // твій код
 

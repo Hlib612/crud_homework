@@ -92,10 +92,13 @@
       "isEnrolled": true
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Dima Bondar",
       "age": 14
+    },
+    {
+      "id": "1e27",
+      "innerHTML": "id: 6 , name: www"
     }
-    
   ]
 }
