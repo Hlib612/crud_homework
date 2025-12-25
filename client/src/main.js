@@ -38,9 +38,6 @@ return students;
 
  }
  
-getStudents()
- .then(result => console.log(...result))
-.catch(err => console.log(err))
 
 
 // Функція для відображення студентів у таблиці
@@ -64,14 +61,14 @@ tableBody.innerHTML = murkup;
 }
 
 
-getStudentBtn.addEventListener("click" , renderStudents())
+getStudentBtn.addEventListener("click" , renderStudents)
 
 
 
 // Функція для додавання нового студента
 
 
-let studentToAdd = {}
+
 
 
 
@@ -102,7 +99,16 @@ let skills = skillsInput.value;
 let email = emailInput.value;
 let enrolled = isEnrolledInput.value;
 
-studentToAdd.innerHTML =`id: 6 , name: ${name}`
+let studentToAdd = {
+        "name": name,
+        "age": age,
+        "course": course,
+        "skills": skills,
+        "email": email,
+        "isEnrolled": enrolled
+}
+
+studentToAdd.innerHTML = studentToAdd;
 
 const options2 ={
     method: "POST",
